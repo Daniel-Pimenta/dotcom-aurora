@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html 
+  xmlns:th="http://thymeleaf.org" 
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  
+<head>
+  <meta charset="UTF-8" />
+  <title>Aurora - Alunos</title>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  
+  <!--Import Google Icon Font-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <!--Import font-awesome.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link rel="stylesheet" href="/aurora/materialize/css/styles.css" />
+</head>
+<body>
+  <div style="height:100%;">
+    <div th:replace="/fragments/header :: header"></div>
+     
+    <div class="container" style="padding:0;">
+    
+
+        
+        <table class="highlight">
+        <thead>
+          <tr><th colspan="5">Alunos da Turma : 
+          <a th:href="@{/turma/listaTurma} +'/'+ ${idEscola}"><span th:text="${turma.nome}"></span></a></th>
+          </tr>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Sexo</th>
+            <th>Idade</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="a : ${alunos}">
+            <td><span th:text="${a.id}"></span></td>
+            <td><span th:text="${a.nome}"></span></td>
+            <td><span th:text="${a.sexo}"></span></td>
+            <td><span th:text="${a.dtNascimento}"></span></td>
+            <td>
+              <a th:href="@{/aluno/deletaAluno} + '/' + ${a.id}"><i class="material-icons left">delete_forever</i></a> 
+              <a th:href="@{/aluno/editAluno} + '/' + ${a.id}"><i class="material-icons left">edit</i></a>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+      
+    </div>
+    <div class="fixed-action-btn">
+  <a class="btn-floating btn-large red" th:href="@{/aluno/novoAluno}+'/'+${idTurma}">
+    <i class="large material-icons">add</i>
+  </a>
+</div>
+  </div>
+  <!--JavaScript at end of body for optimized loading-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script type="text/javascript" src="/aurora/materialize/js/scripts.js"></script>
+</body>
+</html>

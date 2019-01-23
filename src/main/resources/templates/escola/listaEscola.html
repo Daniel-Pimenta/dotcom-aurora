@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html 
+  xmlns:th="http://thymeleaf.org" 
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  
+<head>
+  <meta charset="UTF-8" />
+  <title>Aurora - Escola</title>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  
+  <!--Import Google Icon Font-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <!--Import font-awesome.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link rel="stylesheet" href="/aurora/materialize/css/styles.css" />
+</head>
+<body>
+  <div style="height:100%;">
+    <div th:replace="/fragments/header :: header"></div> 
+    <div class="container" style="padding:0;">
+    
+      <nav class="teal lighten-4">
+        <div class="row valign-wrapper black-text">
+          <div class="col l1  m1 s3" ><i class="small material-icons">school</i></div>
+          <div class="col l11 m11 s9" style="padding:0;">
+            <a th:href="@{/escola/listaEscola}" class="breadcrumb black-text"  style="font-size: 1rem;" >Escolas</a>
+          </div>
+        </div>
+      </nav>  
+      
+      <table class="highlight">
+        <thead>
+          <tr>
+            <th class="hide-on-small-only">#</th>
+            <th>Nome</th>
+            <th>Logradouro</th>
+            <th class="hide-on-small-only">Bairro</th>
+            <th>Cidade</th>
+            <th>UF</th>
+            <th>Turmas</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="e : ${escolas}">
+            <td class="hide-on-small-only"><span th:text="${e.id}"></span></td>
+            <td><span th:text="${e.nome}"></span></td>
+            <td><span th:text="${e.logradouro}"></span></td>
+            <td class="hide-on-small-only"><span th:text="${e.bairro}"></span></td>
+            <td><span th:text="${e.cidade}"></span></td>
+            <td><span th:text="${e.uf}"></span></td>
+            <td>
+              <a th:href="@{/turma/listaTurma}+'/'+ ${e.id}"><i class="material-icons left">group</i></a>
+            </td>
+            <td>
+              <a th:href="@{/escola/deletaEscola} + '/' + ${e.id}"><i class="material-icons left">delete_forever</i></a> 
+              <a th:href="@{/escola/formEscola} + '/' + ${e.id}"><i class="material-icons left">edit</i></a>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+
+    </div>
+  </div>
+        <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red" th:href="@{/escola/formEscola}">
+        <i class="large material-icons">add</i>
+        </a>
+      </div>
+  <!--JavaScript at end of body for optimized loading-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script type="text/javascript" src="/aurora/materialize/js/scripts.js"></script>
+</body>
+</html>

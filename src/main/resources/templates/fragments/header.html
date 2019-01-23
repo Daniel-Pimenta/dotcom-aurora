@@ -1,0 +1,30 @@
+  <header>
+  <nav>
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+      <li><a href="#!">one</a></li>
+      <li><a href="#!">two</a></li>
+      <li class="divider"></li>
+      <li><a th:href="@{/logout}">SAIR</a></li>
+    </ul>
+    
+    <div class="nav-wrapper">
+      <div class="col s8 m10">
+      <a th:href="@{/}" class="brand-logo left" style="font-size:20px;" >
+      <i class="material-icons" style="font-size:4rem">book</i>
+      AURORA.
+      </a>
+      </div>
+      <div class="col s4 m2 center">
+        <ul class="right">
+          <li>
+            <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+              <span sec:authentication="name"></span>
+              <i class="material-icons right">arrow_drop_down</i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  </header>

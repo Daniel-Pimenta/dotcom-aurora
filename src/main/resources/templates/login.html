@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aurora</title>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  
+  <!--Import Google Icon Font-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <!--Import font-awesome.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link rel="stylesheet" href="/aurora/materialize/css/styles.css" />
+</head>
+<body>
+  <div style="height:100%;">
+    <div th:replace="/fragments/header :: header"></div> 
+ 
+    <div class="container" style="padding:0;">
+      <div class="card-panel teal lighten-4">
+        <div class="row">
+          <div th:if="${param.error}">
+            Credencial informada não corresponde a nenhum usuário válido, ou o e-mail ainda não foi verificado.<br>
+            <span th:text="'Msg:' + ${param.error}"></span>
+            <a th:href="@{/novousuario}">Novo Usuário !!!</a>
+          </div>
+          <div th:if="${param.logout}">
+            Você saiu do sistema com sucesso.
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col s12 offset-s0 m8 offset-m2 l6 offset-l3">
+          <div class="card z-depth-2">
+            <div class="card-content">
+              <form name="f" th:action="@{/checar}" th:object="${usuario}" method="post">
+                <div class="row">
+                  <h5>Login</h5>
+                </div>
+                <div class="row">
+                  <div class="input-field">
+                    <i class="material-icons prefix">account_circle</i> 
+                    <input th:field="${usuario.username}" id="username" name="username" type="email" class="validate" /> 
+                    <label for="login">E-mail</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field">
+                    <i class="material-icons prefix">lock</i> 
+                    <input th:field="${usuario.password}" id="password" name="password" type="password" pattern=".{3,20}" class="validate" /> 
+                    <label for="senha">Senha</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field">
+                    <button class="btn waves-effect waves-light" type="submit">
+                      <i class="material-icons left">send</i>Entrar
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--JavaScript at end of body for optimized loading-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script type="text/javascript" src="/aurora/materialize/js/scripts.js"></script>
+</body>
+</html>
